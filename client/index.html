@@ -1,0 +1,205 @@
+<html>
+
+<head>
+    <title>Earthwork Calculator</title>
+    <link rel="shortcut icon" type="image/png" href="https://cdn-icons-png.flaticon.com/512/1127/1127839.png"/>
+    <link rel="stylesheet" href="App.css">
+    <script src="https://unpkg.com/react@16/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.2/umd/react.development.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/17.0.2/umd/react-dom.development.js"></script>
+</head>
+
+<body>
+    <div id="mydiv">
+    </div>
+    <script type="text/babel" >
+
+
+
+
+
+const button = document.getElementById("theButton")
+const data = document.getElementById("info")
+
+const cars = [
+ { "make":"Porsche", "model":"911S" },
+ { "make":"Mercedes-Benz", "model":"220SE" },
+ { "make":"Jaguar","model": "Mark VII" }
+];
+
+function testClick(){
+    button.onclick= function(){
+        fetch("http://127.0.0.1:5000/receiver", 
+            {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'application/json',
+                    'Accept': 'application/json'
+                },
+          
+            body:JSON.stringify(cars)}).then(res=>{
+                    if(res.ok){
+                        return res.json()
+                    }else{
+                        alert("something is wrong")
+                    }
+                }).then(jsonResponse=>{
+                    
+                    // Log the response data in the console
+                    console.log(jsonResponse)
+                } 
+                ).catch((err) => console.error(err));
+                
+               }
+
+    
+}
+
+
+
+
+//can implement useState this way. 
+//     const { useState } = React;
+
+// function Counter() {
+//     const [count, setCount] = useState(0);
+
+//     console.log('testing state:', count)
+// }
+        
+   
+
+
+function Import(){
+ 
+        return(
+            <div class='import'>
+                <h2 class='title'>Import</h2>
+                <div class="import-flex">
+                    <div class="import_inputs">
+                        <h3>Tracker ID:</h3>
+                        <input class='import_values' type='text'></input>
+                        <h3>Tracker Pile QTY:</h3>
+                        <input class='import_values' type='number'></input>
+                        </div> 
+                        <div class="import_buttons">
+                        <input id='choose_file' type="file" ></input>
+                        <button id='theButton'> Optimize Reveal</button>
+                    </div>     
+                </div>  
+                <div>
+                    <button id='clear_button'>Clear Table</button>
+                    </div>
+                    </div>
+                    )
+                }
+
+                
+                
+                
+                
+                function Variable_params(){
+                    return(
+        <div class='variable_outterdiv'>
+            <h2 class='title'>Variable Parameters</h2>
+        <div  class='variable_params'>
+            <div class='variable_name'>Low Tolerance</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Starting Reveal</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Total Rows</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>High Tolerance</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Pitch</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Slope Change</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Step</div>
+            <input class='variable_input' type="number"></input>
+            <div class='variable_name'>Slope Tolerance</div>
+            <input class='variable_input' type="number"></input>
+    
+        </div>
+    </div>
+        )
+    }
+    function Outputs(){
+        return(
+        <div class='output_outterdiv'>
+            <h2 class='title'>Outputs</h2>
+        <div  class='output_variables'>
+            <div class='output_variable_name'>Total Cut CUYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Max Cut CUYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Max Slope:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Top % Worst Cases Cut:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Total Fill CUYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Max Fill CUYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Min Slope:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Top % Worst Cases Cut:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Total Disturbed Area SQYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Max Area SQYD:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Average Pile Reveal LNFT:</div>
+            <h3 class='output_variable' type="number"></h3>
+            <div class='output_variable_name'>Top % Worst Cases Cut:</div>
+            <h3 class='output_variable' type="number"></h3>
+
+        </div>
+    </div>
+        )
+    }
+
+    function Export(){
+        return(
+        <div class='export_div'>
+            <button class='export_buttons'>Export Pile Dist</button>
+            <button class='export_buttons'>Export Adjusted Grade File</button>
+            <button class='export_buttons'>Export Problematic Areas</button>
+        </div>
+        )
+    }
+
+    class Hello extends React.Component{
+        render()
+        {
+            return (
+                <div class="hi">
+                    <Import/>
+                    <Variable_params/>
+                    <Outputs/>
+                    <Export/>
+                    </div>  
+                    )
+                }
+                
+            }
+
+    ReactDOM.render(<Hello />,document.getElementById('mydiv'))
+    </script>
+     <script type="text/babel" >
+            const fileInput = document.getElementById('choose_file');
+            fileInput.onchange = () => {
+            const selectedFile = fileInput.files[0];
+            console.log("selected file", selectedFile);
+        }
+
+    
+     </script>
+
+
+</body>
+
+</html>
+
